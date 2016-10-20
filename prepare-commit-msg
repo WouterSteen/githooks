@@ -1,0 +1,11 @@
+NAME=$(git branch | grep '*' | sed 's/* //')
+MESSAGE=$(cat "$1")
+TICKETNR=$(echo "$NAME" | grep -o '[0-9]\+')
+
+if [ "$TICKETNR" ]; then
+        echo $MESSAGE "[touch:$TICKETNR]" "(Branch: $NAME)" > "$1"
+else
+        echo $MESSAGE "(Branch: $NAME)" > "$1"
+fi
+
+echo The numer $TICKETNR had been added to the commit message to TOUCH ticket # $TICKETNR
